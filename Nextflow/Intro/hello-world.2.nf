@@ -45,6 +45,8 @@ workflow {
     greeting_ch = Channel.of('Hello','Bonjour','Holà')
     // create a channel for inputs from a file
     //greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
+    //{ it.trim() } trim the white line for each split text
+    // emit a greeting. within the curly braces is the groovy code/syntax
     // emit a greeting
     sayHello(greeting_ch)
 
