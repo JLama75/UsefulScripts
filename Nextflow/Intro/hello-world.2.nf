@@ -43,6 +43,8 @@ workflow {
 
     //create a channel for inputs. Build me a channel that has the element hello world!
     greeting_ch = Channel.of('Hello','Bonjour','Holà')
+    // create a channel for inputs from a file
+    //greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
     // emit a greeting
     sayHello(greeting_ch)
 
