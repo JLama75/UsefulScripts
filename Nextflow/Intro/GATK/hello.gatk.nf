@@ -30,7 +30,9 @@ process SAMTOOLS_INDEX {
 workflow {
 
     // Create input channel
+    reads_ch = Channel.fromPath(params.reads_bam)
 
     // Create index file for input BAM file
+    SAMTOOLS_INDEX(reads_ch)
     
 }
