@@ -1,0 +1,2 @@
+docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
+docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
