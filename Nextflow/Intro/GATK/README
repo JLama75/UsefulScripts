@@ -13,3 +13,5 @@ gatk HaplotypeCaller \
         -O reads_mother.g.vcf \
         -L /data/ref/intervals.bed \
         -ERC GVCF
+cat reads_mother.g.vcf
+exit
