@@ -1,3 +1,5 @@
 docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464 #-v allows you to use your data in your terminal
 samtools index /data/bam/reads_mother.bam
+ls /data/bam
+exit
