@@ -30,7 +30,7 @@ process SAMTOOLS_INDEX {
         path input_bam
 
     output:
-        path "${input_bam}.bai"
+        tuple path(input_bam), path("${input_bam}.bai")
 
     """
     samtools index '$input_bam'
@@ -91,4 +91,4 @@ workflow {
         intervals_file
     )
 }
-//nextflow run hello-gatk.nf -resume
+// nextflow run hello-gatk.nf -ansi-log false
