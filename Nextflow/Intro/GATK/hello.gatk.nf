@@ -36,3 +36,6 @@ workflow {
     SAMTOOLS_INDEX(reads_ch)
     
 }
+
+
+#nextflow run hello-gatk.nf 
