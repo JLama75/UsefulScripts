@@ -91,4 +91,4 @@ workflow {
         intervals_file
     )
 }
-#nextflow run hello-gatk.nf -resume
+//nextflow run hello-gatk.nf -resume
