@@ -241,30 +241,25 @@ zgrep "^chr14" gencode.v47.annotation.gtf.gz | grep -i "LTBP2" |awk '{if ($3~/ex
 -bash-4.2$ zgrep "^chr14" gencode.v47.annotation.gtf.gz | grep -i "LTBP2" |awk '{if ($3~/exon/){print}}'| less
 zgrep "^chr14" gencode.v47.annotation.gtf.gz | grep -i "LTBP2" |awk '{if ($3~/gene|exon/){print}}'
 
+##########
+
 du -hs * | sort -hr
  df -h ./
 Filesystem                                Size  Used Avail Use% Mounted on
 panfs://10.129.86.180/hpc/groups/mee-ogi   91T   74T   18T  81% /data/mee-ogi
 
 du -ch SCORE_removeSampleQC.* SCORE_removeSampleQC_newid_removeMT_withSex_indelremove_splitPAR_chrX_sethhmissing_mergeMaleFemale_mergePAR_mergeAuto_sort_rmdup_miss_mono_HWE_chr*
-
 Find combined storage of all files in the folder except some selected
 du -ch --max-depth=1 | grep -vE './(PCA|sumstat|Ancestry)$' | grep total
-
-
 du -ch --max-depth=1 | grep -vE './(*sh| *py | *R | *ipynb | *tsv |*linear |*adjusted |*merged| *locuszoom|PCA|Ancestry)$' | grep total
-
-
 or,
 find . -maxdepth 1 -type f ! -name 'PCA' ! -name 'sumstat' ! -name 'Ancestry' -exec du -ch {} + | grep total
 
 (echo -e "SNP\tGENE\tFeature\tFeature_type\tConsequences" && grep "1:17036:T:C" ./step1/SIOP_FAME_annotated.101524.vcf | awk 'BEGIN{FS=OFS="\t"} !/^#/ {print $1, $4, $5, $6, $7}' ) > 1_17036_T_C_transcriptID.txt
 (echo -e "SNP\tGENE\tFeature\tFeature_type\tConsequences" && grep "1:17036:T:C" /gpfs/fs1/data/Segre_Lab/users/jlama/WES_new.ALL_050824/GeneBurden/FAME_updated/step1/SIOP_FAME_annotated.101524.vcf | awk 'BEGIN{FS=OFS="\t"} !/^#/ {print $1, $4, $5, $6, $7}' ) | less
+df -h /data/sobrinlab/
 
-
-$ df -h /data/sobrinlab/
-
-
+########
 list_snp=('chr5:82257902:G:A' 'chr10:58592770:A:G' 'chr7:110054496:T:C' 
           'chr16:63988826:A:G','chr14:29954101:A:G','chr16:63988826:A:G'
           'chrX:21320210:C:A')
@@ -272,3 +267,19 @@ list_snp=('chr5:82257902:G:A' 'chr10:58592770:A:G' 'chr7:110054496:T:C'
 for snp in "${list_snp[@]}"; do
 echo "sbatch submit.violinPlot.sh ${snp} \"${trait}\" \"${pheno}\"" >> "$outfile"
 done
+
+#########
+snp_list1=("chr12:30572747:C:A" "chr4:118413677:G:A"  "chr5:82257902:G:A" "chr10:58592770:A:G")
+snp_list2=("chr1:96900773:G:A" "chr1:96863842:C:A" "chr1:96246678:T:C")
+snp_list3=("chr14:96255017:G:T" "chr14:96265492:G:A" "chr14:96267038:AAGAG:A" "chr14:96267226:TG:T")
+snp_list4=("chr9:134198147:A:G" "chr17:63045506:A:G")
+snp_list5=("chr16:63988826:A:G")
+#Round to three digits after decimal point
+awk '{$3 = sprintf("%.3f", $3); print}' "$tmp_file" > ./MAF_cal/tmp_file_rounded.tsv
+
+# Header
+echo -n -e "predicted_ancestry" > "$output_file"
+for snp in "${snp_list1[@]}" "${snp_list2[@]}" "${snp_list3[@]}" "${snp_list4[@]}" "${snp_list5[@]}"; do
+    echo -n -e "\t$snp" >> "$output_file"
+done
+echo >> "$output_file"
