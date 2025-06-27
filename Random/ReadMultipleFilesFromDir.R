@@ -5,7 +5,7 @@ files_dir2 <- list.files(dir2, pattern = "\\.txt$", full.names = TRUE)
 # Extract keys from dir1 filenames (chr:pos:ref:alt)
 get_key <- function(file_path) {
   fname <- basename(file_path)
-  str_remove(fname, "\\.ld\\.txt$|\\.txt$") #remove .ld.txt or .ld or .txt from filename
+  str_remove(fname, "\\.ld\\.txt$|\\.txt$")  %>% str_replace_all("_", ":") #remove .ld.txt or .ld or .txt from filename
 }
 
 keys_dir1 <- sapply(files_dir1, get_key)
