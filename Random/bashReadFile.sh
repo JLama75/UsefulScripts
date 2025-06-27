@@ -5,5 +5,6 @@ while IFS= read -r snp; do
 done < text.txt
 
 for snp in "${list_of_SNPs[@]}"; do
-  echo "SNP: $snp"
+  chrom=$(echo "$snp" | cut -d':' -f1)
+  echo "SNP: $snp → Chromosome: $chrom"
 done
