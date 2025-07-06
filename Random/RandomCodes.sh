@@ -283,3 +283,8 @@ for snp in "${snp_list1[@]}" "${snp_list2[@]}" "${snp_list3[@]}" "${snp_list4[@]
     echo -n -e "\t$snp" >> "$output_file"
 done
 echo >> "$output_file"
+
+
+topHits_fame <- topHits_fame %>% 
+      separate(ID, into = c("chrom", "pos", "extra1", "extra2"), sep = ":", remove = FALSE) %>% 
+      dplyr::select(-extra1, -extra2)
