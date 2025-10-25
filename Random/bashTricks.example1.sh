@@ -3,17 +3,17 @@
 #SBATCH --mem=5G            # Job memory request
 #SBATCH --partition=short,medium,long,xnetwork
 
-
 outFile=$1
 trait=$2
-shift              # Remove the first argument so "$@" contains only SNPs
+shift 2             # Remove the first two arguments so "$@" contains only SNPs
 
 # Store remaining arguments (SNPs) in an array
 snpList=("$@")
 echo "Trait: $trait"
 echo "SNPs: ${snpList[@]}"
 
-dir="/gpfs/fs1/data/Segre_Lab/users/jlama/GSA_new.All_040424/Regenie_GWAS/Raw/results"
+dir="/gpfs/fs1/data/Segre_Lab/users/jlama/GSA_new.All_040424/Regenie_GWAS/Raw/results/GWAS"
+mkdir -p ${dir}
 
 echo CHROM GENPOS ID ALLELE0 ALLELE1 A1FREQ INFO N TEST BETA SE CHISQ LOG10P EXTRA > "${output}/${trait}.step2.Max_IOPRise.regenie"
 
