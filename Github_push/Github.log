@@ -1,0 +1,17 @@
+git log --oneline
+
+# Scenario 1 — fully synced:
+b2c8d3e (HEAD -> main, origin/main) Add new analysis
+a3f9b2c Initial commit
+# Both local and GitHub are at b2c8d3e ✅
+
+# Scenario 2 — local ahead of GitHub (need to push):
+d7e1a4f (HEAD -> main) Fix bug in pipeline
+b2c8d3e (origin/main) Add new analysis    ← GitHub stopped here
+a3f9b2c Initial commit
+# Need git push to sync ⚠️
+
+# Scenario 3 — GitHub ahead of local (need to pull):
+b2c8d3e (HEAD -> main) Add new analysis
+d7e1a4f (origin/main) Someone pushed from another machine
+# Need git pull to sync ⚠️
