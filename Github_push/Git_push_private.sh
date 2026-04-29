@@ -37,3 +37,20 @@ git push -u origin main
 # When prompted:
 # Username: your-github-username
 # Password: paste your new Personal Access Token (NOT your GitHub password)
+
+
+###############################################################################
+# Day 2 — make changes
+vim run_batch.py           # edit your file
+git add .
+git commit -m "Fix GPU loading bug"
+# ✅ Local has new commit — GitHub does NOT yet
+
+# Push to sync GitHub
+git push
+# ✅ Now both identical again
+
+# Day 3 — check status anytime
+git status        # shows uncommitted changes
+git log --oneline # shows full commit history
+git diff          # shows line-by-line changes not yet committed
