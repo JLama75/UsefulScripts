@@ -33,6 +33,8 @@ run_cmd() {
 
 run_cmd ${plink2} --vcf "${file}" dosage=HDS --double-id --exclude-if-info "R2<=0.4" --export vcf-4.2 vcf-dosage=HDS id-paste=iid --out "${QC}/chr3.dose.rsq0.4" --threads 12
 echo -e "updating sex information"
+#or,
+#${plink2} --vcf "${file}" dosage=HDS --double-id --exclude-if-info "R2<=0.4" --export vcf-4.2 vcf-dosage=HDS id-paste=iid --out "${QC}/chr3.dose.rsq0.4" --threads 12 || { echo "ERROR: R2 filter step failed"; exit 1; }
 #Assign predicted sex info into .fam file
 run_cmd ${plink2} --vcf "${QC}/chr3.dose.rsq0.4" dosage=HDS --double-id --update-sex ${SEX} --make-pgen --out "${QC}/chr3.dose.rsq0.4.sexUpd" --threads 12
 run_cmd ${plink2} --pfile  "${QC}/chr3.dose.rsq0.4.sexUpd" --set-hh-missing --make-pgen --out "${QC}/chr3.dose.rsq0.6.sexUpd.ind.hhmissing" --threads 12
